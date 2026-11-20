@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101820">
+  <title>Jem Design Studio — AI Architecture & Interior Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Jem Design Studio home">
+        <span class="brand-mark">J</span><span><b>JEM</b><small>DESIGN STUDIO</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="create"><span>✦</span> Create design</button>
+      <button class="nav-item" data-view="projects"><span>▦</span> My projects <em id="project-count">0</em></button>
+      <div class="side-label explore-label">DESIGN CATEGORIES</div>
+      <div class="category-nav">
+        <button class="nav-item category-link active" data-category="Exterior"><span>⌂</span> Exterior</button>
+        <button class="nav-item category-link" data-category="Interior"><span>▤</span> Interior</button>
+        <button class="nav-item category-link" data-category="Floor plan"><span>▦</span> Floor plans</button>
+        <button class="nav-item category-link" data-category="Site plan"><span>⌖</span> Site plans</button>
+        <button class="nav-item category-link" data-category="Landscape"><span>♧</span> Landscape</button>
+        <button class="nav-item category-link" data-category="Commercial"><span>▥</span> Commercial</button>
+        <button class="nav-item category-link" data-category="Other architecture"><span>◇</span> Other designs</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="pro-card"><div class="pro-icon">✧</div><b>Bring your ideas to life</b><p>Describe your vision and create a new design concept.</p><button id="side-start">Start creating ↗</button></div>
+        <div class="side-foot">JEM DESIGN STUDIO <span>v1.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Open menu">☰</button>
+        <div class="crumb">Workspace <span>/</span> <b id="crumb-current">Create design</b></div>
+        <div class="top-actions"><span class="status-dot"></span><span class="api-status">AI workspace</span><button class="avatar">J</button></div>
+      </header>
+
+      <section class="view active" id="create-view">
+        <div class="welcome-row">
+          <div><div class="eyebrow">YOUR CREATIVE WORKSPACE</div><h1>Design beyond <span>limits.</span></h1><p class="lead">Turn your ideas into beautiful architectural concepts with AI.</p></div>
+          <div class="date-chip">✦ &nbsp; AI DESIGN GENERATOR</div>
+        </div>
+        <div class="studio-grid">
+          <section class="generator-panel">
+            <div class="panel-heading"><div><div class="eyebrow">01 — START A PROJECT</div><h2>What would you like to design?</h2></div><span class="sparkle">✧</span></div>
+            <div class="field-label">SELECT DESIGN CATEGORY</div>
+            <div class="category-grid" id="category-grid">
+              <button class="category-card selected" data-category="Exterior"><span class="cat-icon">⌂</span><b>Exterior</b><small>House & building facade</small></button>
+              <button class="category-card" data-category="Interior"><span class="cat-icon">▤</span><b>Interior</b><small>Rooms & living spaces</small></button>
+              <button class="category-card" data-category="Floor plan"><span class="cat-icon">▦</span><b>Floor plan</b><small>2D layout & rooms</small></button>
+              <button class="category-card" data-category="Site plan"><span class="cat-icon">⌖</span><b>Site plan</b><small>Plot & site layout</small></button>
+              <button class="category-card" data-category="Landscape"><span class="cat-icon">♧</span><b>Landscape</b><small>Garden & outdoor</small></button>
+              <button class="category-card" data-category="Commercial"><span class="cat-icon">▥</span><b>Commercial</b><small>Office, shop & hotel</small></button>
+              <button class="category-card" data-category="Other architecture"><span class="cat-icon">◇</span><b>Other</b><small>Stairs, roof, elevation…</small></button>
+            </div>
+
+            <div class="field-label prompt-label">DESCRIBE YOUR DESIGN</div>
+            <textarea id="prompt" rows="4" placeholder="Example: A modern two-storey family house with a flat roof, large glass windows, natural stone cladding, warm exterior lighting, a double garage and tropical landscaping..."></textarea>
+            <div class="prompt-hint"><span>✦</span> Be specific about style, materials, colors, dimensions and lighting.</div>
+
+            <div class="two-fields">
+              <label><span class="field-label">DESIGN STYLE</span><select id="style"><option>Modern contemporary</option><option>Minimalist</option><option>Luxury modern</option><option>Traditional</option><option>Modern Ethiopian</option><option>Scandinavian</option><option>Industrial</option><option>Mediterranean</option><option>Classic</option></select></label>
+              <label><span class="field-label">OUTPUT FORMAT</span><select id="format"><option value="Photorealistic 3D architectural visualization">3D realistic render</option><option value="Professional architectural 2D technical drawing, clean labels and dimensions">2D technical drawing</option><option value="Architectural presentation board showing multiple views">Presentation board</option><option value="Photorealistic interior visualization">Interior visualization</option></select></label>
+            </div>
+            <div class="field-label upload-label">REFERENCE IMAGE <span class="optional">OPTIONAL</span></div>
+            <label class="upload-box" for="reference-image"><span class="upload-symbol">＋</span><span><b>Upload a reference image</b><small>Use an inspiration photo or existing design (PNG, JPG, WEBP)</small></span><span class="browse">Browse</span><input id="reference-image" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <div id="file-preview" class="file-preview hidden"><img id="preview-img" alt="Reference preview"><span id="file-name"></span><button id="remove-file" type="button">Remove</button></div>
+            <div class="generate-row"><div class="quality-note"><span>✧</span><span><b>High quality concepts</b><small>AI-generated design visualization</small></span></div><button class="generate-btn" id="generate-btn"><span>✦</span> Generate design <span>→</span></button></div>
+            <p class="privacy-note">Your API key stays on the server. Generated concepts should be reviewed by a qualified architect or engineer before construction.</p>
+          </section>
+
+          <aside class="preview-panel">
+            <div class="preview-head"><div><div class="eyebrow">02 — LIVE PREVIEW</div><h2>Your canvas</h2></div><span class="live-tag"><i></i> READY</span></div>
+            <div class="canvas" id="canvas">
+              <div class="canvas-grid"></div>
+              <div class="empty-state" id="empty-state"><div class="empty-art"><div class="art-sun"></div><div class="art-house"><div class="art-roof"></div><div class="art-body"><i></i><i></i><i></i></div></div><div class="art-ground"></div></div><b>Your next great design starts here.</b><p>Choose a category, describe your idea, and generate your first concept.</p></div>
+              <div class="loading-state hidden" id="loading-state"><div class="loader"></div><b>Creating your design…</b><p>AI is interpreting your brief and rendering the concept.</p><small>This can take a little while. Please keep this page open.</small></div>
+              <img id="result-image" class="result-image hidden" alt="Generated design result">
+            </div>
+            <div class="result-tools hidden" id="result-tools"><button id="download-btn">↓ Download image</button><button id="save-btn">♡ Save project</button><button id="new-variation-btn">↻ New variation</button></div>
+            <div class="preview-footer"><span>SUPPORTED OUTPUTS</span><div><b>2D</b><b>3D</b><b>HD</b><b>PNG</b></div></div>
+            <div class="tip-card"><span>✦</span><p><b>Design tip</b><br>Include plot dimensions, number of floors, room requirements and preferred materials for more useful concepts.</p></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="projects-view">
+        <div class="welcome-row"><div><div class="eyebrow">YOUR DESIGN LIBRARY</div><h1>My <span>projects.</span></h1><p class="lead">Your saved concepts, all in one place.</p></div></div>
+        <div id="projects-grid" class="projects-grid"></div>
+        <div id="no-projects" class="no-projects"><div>▦</div><h2>No saved projects yet</h2><p>Generate a design and save it to see it here.</p><button id="create-first">Create your first design →</button></div>
+      </section>
+      <footer class="main-footer"><span>© 2026 Jem Design Studio</span><span>Designed to turn ideas into spaces.</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
